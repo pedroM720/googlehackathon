@@ -4,12 +4,17 @@ import './index.css'
 import App from './App.jsx'
 import Navbar from './components/Navbar.jsx'
 import Home from './pages/Home.jsx'
-import TypeReveal from './pages/TypeReveal.jsx'
+import Profile from './pages/Profile.jsx'
 
 // The landing intro stands alone at /. Signed-in pages share the navbar; anything unknown lands on /home.
 const path = window.location.pathname.replace(/\/+$/, '') || '/'
-const PAGES = { '/home': Home, '/reveal': TypeReveal }
-const Page = PAGES[path] ?? Home
+// /reveal opens the profile on its Nook type tab.
+const PAGES = {
+  '/home': { Page: Home, nav: '/home' },
+  '/profile': { Page: Profile, nav: '/profile' },
+  '/reveal': { Page: () => <Profile initialTab="nook" />, nav: '/profile' },
+}
+const { Page, nav } = PAGES[path] ?? PAGES['/home']
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -17,7 +22,7 @@ createRoot(document.getElementById('root')).render(
       <App />
     ) : (
       <div className="has-navbar">
-        <Navbar current={PAGES[path] ? path : '/home'} />
+        <Navbar current={nav} />
         <Page />
       </div>
     )}

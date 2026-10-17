@@ -301,3 +301,8 @@
     transition: none;
   }
 }
+
+.reveal--embedded {
+  min-height: 0;
+  padding: 8px 0 24px;
+}
