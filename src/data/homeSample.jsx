@@ -19,7 +19,7 @@ export const RECENT_ACTIVITY = [
     interest: 5,
     text: (
       <>
-        <strong>Pedro</strong> sparked you back. Say hi while it’s fresh.
+        <strong>Pedro Martinez</strong> sparked you back. Say hi while it’s fresh.
       </>
     ),
     time: '12m ago',
@@ -29,7 +29,7 @@ export const RECENT_ACTIVITY = [
     interest: 4,
     text: (
       <>
-        <strong>Emma</strong> asked to chat with you.
+        <strong>Lena Park</strong> asked to chat with you.
       </>
     ),
     time: '1h ago',
@@ -49,7 +49,7 @@ export const RECENT_ACTIVITY = [
     interest: 3,
     text: (
       <>
-        <strong>Jordan</strong> just added a spark: you.
+        <strong>Jordan Kim</strong> just added a spark: you.
       </>
     ),
     time: 'yesterday',
@@ -57,14 +57,17 @@ export const RECENT_ACTIVITY = [
 ]
 
 export const LEADERBOARD = [
-  { name: 'Maya L.', sparks: 42 },
-  { name: 'Pedro M.', sparks: 37 },
+  { name: 'Maya Lin', sparks: 42 },
+  { name: 'Pedro Martinez', sparks: 37 },
   { name: 'You', sparks: 31, isYou: true },
+  { name: 'Jordan Kim', sparks: 28 },
+  { name: 'Sofia Reyes', sparks: 24 },
 ]
 
 export const SUGGESTED_SPARKS = [
   {
     name: 'pedro martinez',
+    nookType: 'workbench',
     role: ['Prev. Software Engineer @ Advantech', 'UC Berkeley Student'],
     reason:
       'You both seem to learn visually, follow Asia travel content, and just went to the Bruno Mars concert.',
@@ -72,19 +75,22 @@ export const SUGGESTED_SPARKS = [
     featured: true,
   },
   {
-    name: 'emma',
+    name: 'lena park',
+    nookType: 'open-mic',
     role: ['Design @ UC Berkeley'],
     reason: 'You both seem to learn visually and keep coming back to indie rock.',
     color: 'var(--amber)',
   },
   {
     name: 'jordan kim',
+    nookType: 'reading-nook',
     role: ['Data Science @ UC Berkeley'],
     reason: 'You both journal and spend weekends in cafés.',
     color: 'var(--burnt-orange)',
   },
   {
     name: 'sofia reyes',
+    nookType: 'greenhouse',
     role: ['Product Intern @ Figma'],
     reason: 'You both like building small tools for friends.',
     color: 'var(--butter)',
