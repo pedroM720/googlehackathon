@@ -21,11 +21,12 @@ function scrambleFrame(target, progress) {
 }
 
 // Scrambles through each word in `steps` ({ text, ms }) and settles on the last one.
+// Returns the current text, which step it is on, and whether it has settled.
 // Pass a new `steps` array to play it again. With `skip`, shows the last word right away.
 export default function useScramble(steps, { skip = false } = {}) {
   const final = steps[steps.length - 1].text
   // Frames are tagged with the steps they belong to, so a replay starts blank.
-  const [frame, setFrame] = useState({ steps: null, text: '', done: false })
+  const [frame, setFrame] = useState({ steps: null, text: '', index: 0, done: false })
 
   useEffect(() => {
     if (skip) return undefined
@@ -42,7 +43,7 @@ export default function useScramble(steps, { skip = false } = {}) {
       const elapsed = performance.now() - start
       if (elapsed >= total) {
         clearInterval(id)
-        setFrame({ steps, text: steps[steps.length - 1].text, done: true })
+        setFrame({ steps, text: steps[steps.length - 1].text, index: steps.length - 1, done: true })
         return
       }
       const index = ends.findIndex((end) => elapsed < end)
@@ -51,13 +52,13 @@ export default function useScramble(steps, { skip = false } = {}) {
       // Interim words only partly resolve, so they flicker past without settling.
       const isFinal = index === steps.length - 1
       const text = scrambleFrame(steps[index].text, isFinal ? progress : progress * 0.7)
-      setFrame({ steps, text, done: false })
+      setFrame({ steps, text, index, done: false })
     }, TICK_MS)
 
     return () => clearInterval(id)
   }, [steps, skip])
 
-  if (skip) return { text: final, done: true }
-  if (frame.steps !== steps) return { text: '', done: false }
-  return { text: frame.text, done: frame.done }
+  if (skip) return { text: final, index: steps.length - 1, done: true }
+  if (frame.steps !== steps) return { text: '', index: 0, done: false }
+  return frame
 }

@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import useScramble from '../hooks/useScramble.js'
+import TypeIcon from '../components/TypeIcon.jsx'
 import { NOOK_TYPES, SAMPLE_RESULT } from '../data/nookTypes.js'
 import './TypeReveal.css'
 
@@ -22,8 +23,12 @@ function shuffle(list) {
 function buildSteps(type) {
   const others = shuffle(NOOK_TYPES.filter((t) => t.slug !== type.slug))
   return [
-    ...others.slice(0, INTERIM_COUNT).map((t) => ({ text: placeName(t.name), ms: INTERIM_MS })),
-    { text: placeName(type.name), ms: FINAL_MS },
+    ...others.slice(0, INTERIM_COUNT).map((t) => ({
+      slug: t.slug,
+      text: placeName(t.name),
+      ms: INTERIM_MS,
+    })),
+    { slug: type.slug, text: placeName(type.name), ms: FINAL_MS },
   ]
 }
 
@@ -36,7 +41,7 @@ export default function TypeReveal() {
   const [steps, setSteps] = useState(() => buildSteps(type))
   const [skip] = useState(prefersReducedMotion)
 
-  const { text, done } = useScramble(steps, { skip })
+  const { text, index, done } = useScramble(steps, { skip })
 
   return (
     <main className={`reveal ${done ? 'is-revealed' : ''}`}>
@@ -50,8 +55,15 @@ export default function TypeReveal() {
         <p className="reveal__lead">Your Nook type is</p>
         <h1 className="reveal__name">
           <span className="reveal__the">The</span>
-          <span className="reveal__word" aria-hidden="true">
-            {text || ' '}
+          <span className="reveal__row" aria-hidden="true">
+            <span className="reveal__word">{text || '\u00a0'}</span>
+            {text && (
+              <TypeIcon
+                key={`${index}-${steps[index].slug}`}
+                slug={steps[index].slug}
+                className="reveal__icon"
+              />
+            )}
           </span>
           <span className="visually-hidden" aria-live="polite">
             {done ? type.name : ''}
