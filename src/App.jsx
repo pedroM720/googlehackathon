@@ -7,7 +7,7 @@ const HOLD_MS = 6200
 const HOLD_REDUCED_MS = 1800
 const FADE_MS = 600
 
-export default function App() {
+export default function App({ onDone }) {
   const [leaving, setLeaving] = useState(false)
 
   useEffect(() => {
@@ -18,9 +18,9 @@ export default function App() {
 
   useEffect(() => {
     if (!leaving) return
-    const go = setTimeout(() => window.location.assign('/home'), FADE_MS)
+    const go = setTimeout(onDone, FADE_MS)
     return () => clearTimeout(go)
-  }, [leaving])
+  }, [leaving, onDone])
 
   return (
     <main className={`intro ${leaving ? 'is-leaving' : ''}`}>

@@ -2,9 +2,8 @@
   position: sticky;
   top: 0;
   z-index: 10;
-  background: rgba(255, 248, 236, 0.92);
+  background: rgba(255, 248, 236, 0.97);
   border-bottom: 1px solid rgba(134, 121, 109, 0.18);
-  backdrop-filter: blur(6px);
 }
 
 .navbar__inner {

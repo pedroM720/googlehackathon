@@ -1,0 +1,107 @@
+.chips {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  min-width: 0;
+}
+
+.chips__label {
+  padding: 0;
+  margin-bottom: 10px;
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--espresso);
+}
+
+.chips__wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  min-height: 36px;
+  padding: 6px 14px;
+  border: 1px solid rgba(232, 106, 44, 0.28);
+  border-radius: 999px;
+  background: var(--ivory);
+  color: var(--espresso);
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  line-height: 1.2;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.chip:hover {
+  border-color: rgba(232, 106, 44, 0.55);
+}
+
+.chip:active {
+  transform: scale(0.97);
+}
+
+.chip[aria-pressed='true'] {
+  background: #fcdba4;
+  border-color: #fcdba4;
+}
+
+.chip[aria-pressed='true']::before {
+  content: '';
+  width: 10px;
+  height: 6px;
+  margin: -3px 1px 0 -2px;
+  border: solid var(--espresso);
+  border-width: 0 0 2px 2px;
+  transform: rotate(-45deg);
+}
+
+.chip:focus-visible {
+  outline: 2px solid var(--burnt-orange);
+  outline-offset: 2px;
+}
+
+.chip--more {
+  border-style: dashed;
+  color: #6f6358;
+}
+
+.chips__hint {
+  margin: 8px 0 0;
+  font-size: 0.875rem;
+  color: var(--warm-gray);
+}
+
+/* Smaller chips for dense lists such as the search filters. */
+.chips--sm .chips__label {
+  margin-bottom: 8px;
+  font-size: 1rem;
+}
+
+.chips--sm .chips__wrap {
+  gap: 6px;
+}
+
+.chips--sm .chip {
+  min-height: 30px;
+  padding: 4px 11px;
+  font-size: 0.875rem;
+}
+
+.chips--sm .chip[aria-pressed='true']::before {
+  width: 8px;
+  height: 5px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .chip {
+    transition: none;
+  }
+}
