@@ -258,6 +258,29 @@
   text-align: center;
 }
 
+.reveal__next {
+  align-self: center;
+  margin-top: 8px;
+  padding: 12px 26px;
+  border-radius: 999px;
+  background: var(--tangerine);
+  color: var(--espresso);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(232, 106, 44, 0.25);
+  transition: background-color 0.15s ease;
+}
+
+.reveal__next:hover {
+  background: var(--burnt-orange);
+}
+
+.reveal__next:focus-visible {
+  outline: 2px solid var(--espresso);
+  outline-offset: 3px;
+}
+
 .reveal__replay {
   align-self: center;
   padding: 8px 16px;

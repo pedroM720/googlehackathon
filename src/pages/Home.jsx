@@ -1,4 +1,5 @@
 import { LEADERBOARD, RECENT_ACTIVITY, SAMPLE_USER, SUGGESTED_SPARKS } from '../data/homeSample.jsx'
+import ChatBubble from '../components/ChatBubble.jsx'
 import SparkIcon from '../components/SparkIcon.jsx'
 import TypeIcon from '../components/TypeIcon.jsx'
 import { NOOK_TYPES, SAMPLE_RESULT } from '../data/nookTypes.js'
@@ -21,8 +22,8 @@ const ACTIVITY_ICONS = {
   chat: (
     <path d="M5 5h14v10H10l-4 4v-4H5z" />
   ),
-  search: (
-    <path d="M10.5 4a6.5 6.5 0 1 1 0 13 6.5 6.5 0 0 1 0-13ZM15.5 15.5 20 20" />
+  'in-person': (
+    <path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11ZM12 7.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5Z" />
   ),
 }
 
@@ -146,8 +147,9 @@ export default function Home() {
 
         <aside className="home__side">
           <nav className="home__menu" aria-label="Your nook">
-            <a href="/my-nook">my nook</a>
-            <a href="#sparks">my sparks</a>
+            <a href="/profile">my nook</a>
+            <a href="/sparks">my sparks</a>
+            <a href="/messages">messages</a>
             <a href="/search">search</a>
           </nav>
 
@@ -170,12 +172,7 @@ export default function Home() {
         </aside>
       </div>
 
-      <button type="button" className="chat-bubble" aria-label="Chats (coming soon)" disabled>
-        <svg viewBox="0 0 48 48" aria-hidden="true">
-          <path d="M24 6c10 0 18 7.4 18 16.5S34 39 24 39c-2 0-4-.3-5.8-.8L9 42l2.4-7.4C7.9 31.6 6 27.3 6 22.5 6 13.4 14 6 24 6Z" />
-        </svg>
-        <span className="chat-bubble__badge">2</span>
-      </button>
+      <ChatBubble />
     </main>
   )
 }

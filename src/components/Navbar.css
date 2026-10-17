@@ -91,8 +91,15 @@
     width: 68px;
   }
 
+  .navbar__links {
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
   .navbar__links a {
     padding: 6px 10px;
     font-size: 0.9375rem;
+    white-space: nowrap;
   }
 }

@@ -1,15 +1,24 @@
 import { useEffect, useState } from 'react'
 import ChipGroup from '../components/ChipGroup.jsx'
-import { CONNECT_GROUPS, FOCUS_INTERESTS, MONTHS, SKILLS } from '../data/profileOptions.js'
+import {
+  CONNECT_GROUPS,
+  FOCUS_INTERESTS,
+  GOALS,
+  HOBBIES,
+  MONTHS,
+  SKILLS,
+} from '../data/profileOptions.js'
 import './Profile.css'
 
-// The signed-in user's profile: fill in your info, then "get my nook type" leads to the reveal.
-// Everything here is sample data held in the page; nothing is saved or sent anywhere yet.
+// The signed-in user's profile, called their nook: fill it in, create it, then "get my nook type"
+// leads to the reveal. Everything is sample data held in the page; nothing is saved or sent yet.
 const SAMPLE_PROFILE = {
   name: 'Amy Jung',
   school: 'UC Berkeley Student',
   focus: ['UI/UX', 'Graphic Design', 'Content Creation'],
   skills: ['UI/UX', 'Coding', 'Data Analysis'],
+  hobbies: ['Photography', 'Digital Illustration', 'Thrifting'],
+  goals: ['Collaborators', 'Friends in my field'],
   connect: ['Instagram', 'YouTube', 'Spotify', 'Claude'],
 }
 
@@ -65,6 +74,8 @@ function AboutMe() {
   const [focus, setFocus] = useState(SAMPLE_PROFILE.focus)
   const [skills, setSkills] = useState(SAMPLE_PROFILE.skills)
   const [connect, setConnect] = useState(SAMPLE_PROFILE.connect)
+  const [hobbies, setHobbies] = useState(SAMPLE_PROFILE.hobbies)
+  const [goals, setGoals] = useState(SAMPLE_PROFILE.goals)
 
   return (
     <form className="about" onSubmit={(e) => e.preventDefault()}>
@@ -92,6 +103,14 @@ function AboutMe() {
         <Field label="MBTI" hint="(optional)" htmlFor="profile-mbti">
           <input id="profile-mbti" maxLength={4} placeholder="Enter your MBTI" />
         </Field>
+        <div className="field--wide">
+          <Field label="Background" htmlFor="profile-background">
+            <input
+              id="profile-background"
+              placeholder="School, major, and anything you’ve worked on"
+            />
+          </Field>
+        </div>
       </div>
 
       <div className="about__columns">
@@ -111,6 +130,13 @@ function AboutMe() {
             shown={5}
             hint="Choose as many as you want!"
           />
+          <ChipGroup
+            label="Hobbies"
+            options={HOBBIES}
+            selected={hobbies}
+            onToggle={(o) => setHobbies((l) => toggle(l, o))}
+            shown={7}
+          />
         </div>
 
         <div className="about__card">
@@ -119,8 +145,9 @@ function AboutMe() {
             <span className="profile__sample">coming soon</span>
           </div>
           <p className="connect__note">
-            Nook will read the accounts you link to find your type and your people. Linking isn’t
-            live yet, so for now these just mark the ones you’d connect.
+            You choose what Nook reads. The accounts you link help it find your type and your
+            people, and you can edit or disconnect anything at any time. Linking isn’t live yet,
+            so for now these just mark the ones you’d connect.
           </p>
           {CONNECT_GROUPS.map((group) => (
             <ChipGroup
@@ -133,6 +160,13 @@ function AboutMe() {
               size="sm"
             />
           ))}
+          <ChipGroup
+            label="Professional goals"
+            options={GOALS}
+            selected={goals}
+            onToggle={(o) => setGoals((l) => toggle(l, o))}
+            size="sm"
+          />
         </div>
       </div>
     </form>
@@ -140,12 +174,14 @@ function AboutMe() {
 }
 
 export default function Profile() {
+  const [created, setCreated] = useState(false)
+
   return (
     <main className="profile">
       <header className="profile__head">
         <Photo />
         <div className="profile__intro">
-          <h1 className="profile__title">my profile</h1>
+          <h1 className="profile__title">my nook</h1>
           <p className="profile__name">{SAMPLE_PROFILE.name}</p>
           <p className="profile__meta">
             {SAMPLE_PROFILE.school}
@@ -156,11 +192,24 @@ export default function Profile() {
 
       <AboutMe />
 
-      <div className="profile__next">
-        <p>Filled in what feels like you? Nook can find the kind of place you’d be.</p>
-        <a className="profile__cta" href="/my-nook">
-          get my nook type
-        </a>
+      <div className={`profile__next ${created ? 'is-created' : ''}`} aria-live="polite">
+        {created ? (
+          <>
+            <p>
+              <strong>Your nook is ready.</strong> Next, Nook can find the kind of place you’d be.
+            </p>
+            <a className="profile__cta" href="/my-nook">
+              get my nook type
+            </a>
+          </>
+        ) : (
+          <>
+            <p>Filled in what feels like you? You can change any of it later.</p>
+            <button type="button" className="profile__cta" onClick={() => setCreated(true)}>
+              create profile
+            </button>
+          </>
+        )}
       </div>
     </main>
   )

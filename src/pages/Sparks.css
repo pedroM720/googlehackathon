@@ -1,0 +1,368 @@
+/* My sparks: a list of your sparks with a next step each, and suggested sparks on the side. */
+.sparks-page {
+  --panel: rgba(255, 252, 244, 0.9);
+
+  position: relative;
+  isolation: isolate;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: clamp(24px, 5vh, 44px) 24px 112px;
+}
+
+/* The one glow on this view, pooled behind the heading. */
+.sparks-page::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: -40px;
+  width: min(620px, 90vw);
+  height: 300px;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(closest-side, rgba(255, 210, 100, 0.42), rgba(255, 233, 163, 0));
+}
+
+.sparks-page__head {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-bottom: clamp(20px, 4vh, 32px);
+}
+
+.sparks-page__head h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.sparks-page__sample {
+  font-size: 0.75rem;
+  font-weight: 600;
+  background: var(--cream);
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+
+.sparks-page__layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 290px;
+  gap: 24px;
+  align-items: start;
+}
+
+.sparks-page__panel,
+.sparks-page__side {
+  background: var(--panel);
+  border: 1px solid rgba(134, 121, 109, 0.14);
+  border-radius: 18px;
+  box-shadow: 0 8px 24px rgba(48, 32, 22, 0.05);
+}
+
+.sparks-page__panel {
+  padding: 16px;
+}
+
+.spark-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 10px;
+}
+
+.spark-row {
+  display: grid;
+  grid-template-columns: auto minmax(150px, 1fr) minmax(0, 1.4fr) auto;
+  align-items: center;
+  gap: 10px 16px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #ffe6b3;
+  animation: spark-row-in 0.3s ease-out both;
+}
+
+.spark-row--you-sparked {
+  background: var(--cream);
+}
+
+.spark-row__avatar {
+  width: 48px;
+  height: 48px;
+  font-size: 1rem;
+}
+
+.spark-row__who p {
+  margin: 0;
+}
+
+.spark-row__name {
+  font-size: 1.0625rem;
+  font-weight: 600;
+}
+
+.spark-row__status {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-top: 2px !important;
+  font-size: 0.875rem;
+  color: #5c4f44;
+}
+
+.spark-row__status-icon {
+  flex: none;
+  width: 14px;
+  height: 14px;
+  color: var(--burnt-orange);
+}
+
+.spark-row__tags {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.spark-row__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: var(--ivory);
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.spark-row__tag--type {
+  padding-left: 4px;
+  font-weight: 600;
+}
+
+.spark-row__type-icon {
+  width: 20px;
+  height: 20px;
+}
+
+.spark-row__type-icon .type-icon__accent,
+.suggested__type-icon .type-icon__accent {
+  fill: var(--tangerine);
+}
+
+.spark-row__action {
+  justify-self: end;
+}
+
+.spark-row__btn,
+.suggested__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 9px 16px;
+  border: 1.5px solid var(--tangerine);
+  border-radius: 999px;
+  background: var(--ivory);
+  color: var(--espresso);
+  font: inherit;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  white-space: nowrap;
+  cursor: pointer;
+  transition:
+    background-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.spark-row__btn:hover,
+.suggested__btn:hover:not(:disabled) {
+  background: #ffd9a8;
+}
+
+.spark-row__btn:active,
+.suggested__btn:active:not(:disabled) {
+  transform: scale(0.97);
+}
+
+.spark-row__btn:focus-visible,
+.suggested__btn:focus-visible {
+  outline: 2px solid var(--burnt-orange);
+  outline-offset: 2px;
+}
+
+.spark-row__btn--primary {
+  background: var(--tangerine);
+}
+
+.spark-row__btn--primary:hover {
+  background: var(--burnt-orange);
+}
+
+.spark-row__btn--quiet {
+  border-color: rgba(134, 121, 109, 0.35);
+}
+
+.spark-row__btn-icon,
+.suggested__btn-icon {
+  width: 18px;
+  height: 18px;
+  color: var(--tangerine);
+}
+
+.spark-row__waiting {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #5c4f44;
+  white-space: nowrap;
+}
+
+/* Suggested sparks */
+.sparks-page__side {
+  padding: 18px;
+}
+
+.sparks-page__side h2 {
+  margin: 0 0 12px;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.suggested {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 12px;
+}
+
+.suggested__card {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border-radius: 14px;
+  background: #fcdba4;
+}
+
+.suggested__who {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.suggested__who p {
+  margin: 0;
+}
+
+.suggested__avatar {
+  width: 44px;
+  height: 44px;
+}
+
+.suggested__name {
+  font-weight: 600;
+}
+
+.suggested__type {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 0.8125rem;
+  font-weight: 500;
+}
+
+.suggested__type-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.suggested__reason {
+  display: flex;
+  gap: 8px;
+  margin: 0;
+  padding: 12px;
+  border-radius: 10px;
+  background: var(--ivory);
+  font-size: 0.875rem;
+  line-height: 1.45;
+}
+
+.suggested__sparkle {
+  flex: none;
+  width: 18px;
+  height: 18px;
+  fill: none;
+  stroke: var(--espresso);
+  stroke-width: 1.4;
+  stroke-linejoin: round;
+}
+
+.suggested__btn {
+  justify-self: start;
+}
+
+.suggested__btn:disabled {
+  background: var(--tangerine);
+  cursor: default;
+}
+
+.suggested__btn:disabled .suggested__btn-icon {
+  color: var(--espresso);
+}
+
+@keyframes spark-row-in {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (max-width: 1000px) {
+  .spark-row {
+    grid-template-columns: auto minmax(0, 1fr) auto;
+  }
+
+  .spark-row__tags {
+    grid-column: 2 / -1;
+    grid-row: 2;
+  }
+
+  .spark-row__action {
+    grid-row: 1;
+    grid-column: 3;
+  }
+}
+
+@media (max-width: 820px) {
+  .sparks-page__layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .sparks-page {
+    padding: 20px 16px 104px;
+  }
+
+  .spark-row {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  .spark-row__tags,
+  .spark-row__action {
+    grid-column: 1 / -1;
+    grid-row: auto;
+    justify-self: start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spark-row {
+    animation: none;
+  }
+}

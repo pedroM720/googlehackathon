@@ -108,6 +108,10 @@ export default function TypeReveal() {
           coming soon.
         </p>
 
+        <a className="reveal__next" href="/home" tabIndex={done ? 0 : -1}>
+          See who you might click with
+        </a>
+
         <button
           type="button"
           className="reveal__replay"

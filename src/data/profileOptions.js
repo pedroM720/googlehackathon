@@ -57,6 +57,16 @@ export const MUSIC_GENRES = [
   'Latin',
 ]
 
+export const GOALS = [
+  'Find a mentor',
+  'Collaborators',
+  'Internship',
+  'Friends in my field',
+  'Side projects',
+  'Co-founder',
+  'Career switch',
+]
+
 // Connecting accounts isn't built yet: these are the services the profile will offer.
 export const CONNECT_GROUPS = [
   {
@@ -65,7 +75,7 @@ export const CONNECT_GROUPS = [
     shown: 6,
   },
   { label: 'Music platforms', options: ['Spotify', 'Apple Music', 'SoundCloud', 'YouTube Music'], shown: 2 },
-  { label: 'AI assistant', options: ['Claude', 'Gemini', 'ChatGPT', 'Perplexity'], shown: 3 },
+  { label: 'AI assistant history', options: ['Claude', 'Gemini', 'ChatGPT', 'Perplexity'], shown: 3 },
 ]
 
 export const MONTHS = [

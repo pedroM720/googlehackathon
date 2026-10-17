@@ -2,7 +2,9 @@ import './Navbar.css'
 
 const LINKS = [
   { href: '/home', label: 'home' },
-  { href: '/my-nook', label: 'my nook' },
+  { href: '/profile', label: 'my nook' },
+  { href: '/sparks', label: 'my sparks' },
+  { href: '/messages', label: 'messages' },
   { href: '/search', label: 'search' },
 ]
 
