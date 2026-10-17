@@ -1,0 +1,248 @@
+/* Nook type reveal: the place name scrambles through other types, then settles under a lamp glow. */
+.reveal {
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px 16px 64px;
+  text-align: center;
+}
+
+.reveal__brand {
+  align-self: stretch;
+  display: flex;
+  justify-content: center;
+  margin-bottom: clamp(32px, 8vh, 72px);
+}
+
+.reveal__brand img {
+  display: block;
+  width: 112px;
+  height: auto;
+}
+
+.reveal__hero {
+  position: relative;
+  width: 100%;
+  max-width: 760px;
+  padding: 24px 0 8px;
+}
+
+/* The one glow on this view, switched on when the name lands. */
+.reveal__hero::before {
+  content: '';
+  position: absolute;
+  inset: -10% 0 10%;
+  z-index: -1;
+  background: radial-gradient(closest-side, rgba(255, 181, 46, 0.32), rgba(255, 181, 46, 0));
+  opacity: 0;
+  transform: scale(0.8);
+  transition:
+    opacity 0.9s ease-out,
+    transform 0.9s ease-out;
+}
+
+.is-revealed .reveal__hero::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.reveal__lead {
+  margin: 0 0 12px;
+  font-size: clamp(1rem, 2.4vw, 1.25rem);
+  font-weight: 500;
+  color: var(--warm-gray);
+  letter-spacing: 0.04em;
+}
+
+.reveal__name {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  line-height: 1.05;
+}
+
+.reveal__the {
+  font-size: clamp(1.25rem, 3vw, 1.75rem);
+  font-weight: 500;
+  color: var(--warm-gray);
+}
+
+.reveal__word {
+  font-size: clamp(2.5rem, 10vw, 5rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--warm-gray);
+  white-space: nowrap;
+  transition: color 0.4s ease-out;
+}
+
+.is-revealed .reveal__word {
+  color: var(--espresso);
+}
+
+.reveal__quote,
+.reveal__meta,
+.reveal__details {
+  opacity: 0;
+  transform: translateY(10px);
+  transition:
+    opacity 0.7s ease-out,
+    transform 0.7s ease-out;
+}
+
+.is-revealed .reveal__quote,
+.is-revealed .reveal__meta,
+.is-revealed .reveal__details {
+  opacity: 1;
+  transform: none;
+}
+
+.is-revealed .reveal__quote {
+  transition-delay: 0.25s;
+}
+
+.is-revealed .reveal__meta {
+  transition-delay: 0.45s;
+}
+
+.is-revealed .reveal__details {
+  transition-delay: 0.7s;
+}
+
+.reveal__quote {
+  margin: 20px 0 0;
+  font-size: clamp(1.125rem, 2.6vw, 1.375rem);
+  font-style: italic;
+}
+
+.reveal__meta {
+  margin: 20px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+}
+
+.reveal__axes,
+.reveal__lean {
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+.reveal__axes {
+  background: var(--butter);
+}
+
+.reveal__lean {
+  background: var(--cream);
+  color: var(--espresso);
+}
+
+.reveal__details {
+  width: 100%;
+  max-width: 600px;
+  margin-top: clamp(32px, 6vh, 56px);
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  text-align: left;
+}
+
+.reveal__card {
+  margin: 0;
+  padding: 20px 24px;
+  background: var(--cream);
+  border: 1px solid rgba(134, 121, 109, 0.18);
+  border-radius: 16px;
+  box-shadow: 0 6px 18px rgba(48, 32, 22, 0.05);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.reveal__card p {
+  margin: 0;
+}
+
+.reveal__card p + p {
+  margin-top: 12px;
+}
+
+.reveal__card h2 {
+  margin: 0 0 8px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.reveal__reasons {
+  margin: 0;
+  padding-left: 1.2em;
+}
+
+.reveal__reasons li + li {
+  margin-top: 6px;
+}
+
+.reveal__pairs {
+  display: grid;
+  gap: 12px;
+}
+
+.reveal__pairs dt {
+  font-weight: 600;
+}
+
+.reveal__pairs dd {
+  margin: 2px 0 0;
+}
+
+.reveal__note {
+  margin: 8px 0 0;
+  font-size: 1rem;
+  color: var(--warm-gray);
+  text-align: center;
+}
+
+.reveal__replay {
+  align-self: center;
+  padding: 8px 16px;
+  border: 0;
+  border-radius: 999px;
+  background: none;
+  font: inherit;
+  font-weight: 600;
+  color: var(--burnt-orange);
+  cursor: pointer;
+}
+
+.reveal__replay:hover {
+  text-decoration: underline;
+}
+
+.reveal__replay:focus-visible {
+  outline: 2px solid var(--amber);
+  outline-offset: 2px;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal__hero::before,
+  .reveal__word,
+  .reveal__quote,
+  .reveal__meta,
+  .reveal__details {
+    transition: none;
+  }
+}
