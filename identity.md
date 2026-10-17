@@ -65,9 +65,9 @@ Recruiting is a possible future use, not the MVP focus.
 **Status: final.** The final mark is in the repo and is the one to use everywhere on the site.
 
 **Assets**
-- `public/brand/nook-logo.png`: the original final logo (927×536, white background).
-- `public/brand/nook-logo.svg`: vector version traced from the PNG, transparent background. Use it for static placements (`<img src="/brand/nook-logo.svg">`).
-- `src/components/Wordmark.jsx`: the same vector as a React component with the lamp as separate layers, so it can be switched off and on (used by the landing intro). Path data lives in `src/components/logoPaths.js`.
+- `public/nook-logo.png`: the final logo as a raster with a transparent background.
+- `public/nook-logo.svg`: vector version traced from the final logo, transparent background. Prefer it for static placements (`<img src="/nook-logo.svg">`) since it stays sharp at any size.
+- `src/components/Wordmark.jsx`: the same vector as a React component, rendered lit by default. The lamp is in separate layers so a page can switch it off and on (the landing intro does this in `App.css`). Path data lives in `src/components/logoPaths.js`.
 
 **Anatomy**
 - **Letters:** lowercase **nook** in a clean geometric sans with flat terminals, solid black (`#000000`).

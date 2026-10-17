@@ -1,4 +1,4 @@
-// Vector layers of the final nook logo, traced from public/brand/nook-logo.png.
+// Vector layers of the final nook logo, traced from the final logo PNG (public/nook-logo.png).
 // Paths are in potrace units: wrap them in a group with LAYER_TRANSFORM.
 export const LAYER_TRANSFORM = 'translate(0 536) scale(0.1 -0.1)'
 export const VIEW_BOX = '20 10 900 490'

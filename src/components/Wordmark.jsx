@@ -11,9 +11,10 @@ import {
   SHADE,
   VIEW_BOX,
 } from './logoPaths.js'
+import './Wordmark.css'
 
 // The final nook logo as layered SVG, so the lamp can be switched on and off.
-// Everything inside .lamp-light is the lit state; the shade's colour is set in CSS.
+// Everything inside .lamp-light is the lit state. It renders lit; see Wordmark.css.
 export default function Wordmark({ className = '' }) {
   const coneId = useId()
 

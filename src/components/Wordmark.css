@@ -1,0 +1,19 @@
+/* Lit by default. A page that animates the lamp overrides .lamp-light and .lamp-shade. */
+.wordmark {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.wordmark .lamp-shade {
+  fill: #ff8544;
+}
+
+.wordmark .lamp-opening-off {
+  fill: #b98a6c;
+}
+
+.wordmark .lamp-bulb-off {
+  fill: #e8ded2;
+}

@@ -36,30 +36,14 @@
   animation: slide-down 1.25s cubic-bezier(0.16, 1.1, 0.3, 1) var(--t-mark) forwards;
 }
 
-.wordmark {
-  display: block;
-  width: 100%;
-  height: auto;
-  overflow: visible;
-}
-
-.lamp-light {
+.intro .lamp-light {
   opacity: 0;
   animation: flicker-light 1.5s linear var(--t-lamp) forwards;
 }
 
-.lamp-shade {
+.intro .lamp-shade {
   fill: #c9a58a;
- 
   animation: flicker-shade 1.5s linear var(--t-lamp) forwards;
-}
-
-.lamp-opening-off {
-  fill: #b98a6c;
-}
-
-.lamp-bulb-off {
-  fill: #e8ded2;
 }
 
 .intro__tagline {
@@ -130,13 +114,13 @@
   .intro__lead,
   .intro__mark,
   .intro__tagline,
-  .lamp-light,
-  .lamp-shade {
+  .intro .lamp-light,
+  .intro .lamp-shade {
     animation: none;
     opacity: 1;
     transform: none;
   }
-  .lamp-shade {
+  .intro .lamp-shade {
     fill: #ff8544;
   }
 }
