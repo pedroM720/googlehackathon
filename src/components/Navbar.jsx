@@ -3,6 +3,7 @@ import './Navbar.css'
 const LINKS = [
   { href: '/home', label: 'home' },
   { href: '/profile', label: 'my nook' },
+  { href: '/search', label: 'search' },
 ]
 
 export default function Navbar({ current }) {

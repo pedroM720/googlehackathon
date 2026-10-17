@@ -148,9 +148,7 @@ export default function Home() {
           <nav className="home__menu" aria-label="Your nook">
             <a href="/reveal">my nook</a>
             <a href="#sparks">my sparks</a>
-            <span className="home__menu-soon" aria-disabled="true">
-              search <small>soon</small>
-            </span>
+            <a href="/search">search</a>
           </nav>
 
           <a className="side-card side-card--type" href="/reveal">
