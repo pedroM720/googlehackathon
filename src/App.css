@@ -1,0 +1,135 @@
+/* Intro sequence: lead line, wordmark slides down, lamp flickers on, tagline. */
+.intro {
+  --t-lead: 0.3s;
+  --t-mark: 1.4s;
+  --t-lamp: 2.7s;
+  --t-tagline: 4.3s;
+
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(12px, 3vh, 28px);
+  padding: 24px 16px;
+  overflow: hidden;
+  text-align: center;
+}
+
+.intro__lead {
+  margin: 0;
+  font-size: clamp(1rem, 2.4vw, 1.375rem);
+  font-weight: 500;
+  color: var(--warm-gray);
+  letter-spacing: 0.04em;
+  opacity: 0;
+  animation: rise-in 0.9s ease-out var(--t-lead) forwards;
+}
+
+.intro__mark {
+  margin: 0;
+  width: min(84vw, 560px);
+  line-height: 0;
+  opacity: 0;
+  transform: translateY(-70vh);
+  animation: slide-down 1.25s cubic-bezier(0.16, 1.1, 0.3, 1) var(--t-mark) forwards;
+}
+
+.wordmark {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+
+.lamp-light {
+  opacity: 0;
+  animation: flicker-light 1.5s linear var(--t-lamp) forwards;
+}
+
+.lamp-shade {
+  fill: #c9a58a;
+  stroke: #c9a58a;
+  animation: flicker-shade 1.5s linear var(--t-lamp) forwards;
+}
+
+.intro__tagline {
+  margin: 0;
+  font-size: clamp(1rem, 2.6vw, 1.5rem);
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  color: var(--espresso);
+  opacity: 0;
+  animation: rise-in 1s ease-out var(--t-tagline) forwards;
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-down {
+  0% {
+    opacity: 0;
+    transform: translateY(-70vh);
+  }
+  35% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* An old bulb catching: a couple of stutters, then it holds. */
+@keyframes flicker-light {
+  0% { opacity: 0; }
+  6% { opacity: 0.85; }
+  10% { opacity: 0.1; }
+  18% { opacity: 0; }
+  24% { opacity: 0.6; }
+  27% { opacity: 0.15; }
+  40% { opacity: 0.05; }
+  46% { opacity: 1; }
+  52% { opacity: 0.45; }
+  58% { opacity: 1; }
+  100% { opacity: 1; }
+}
+
+@keyframes flicker-shade {
+  0% { fill: #c9a58a; stroke: #c9a58a; }
+  6% { fill: #ff873e; stroke: #ff873e; }
+  10% { fill: #d8a07c; stroke: #d8a07c; }
+  18% { fill: #c9a58a; stroke: #c9a58a; }
+  24% { fill: #f5945a; stroke: #f5945a; }
+  27% { fill: #d8a07c; stroke: #d8a07c; }
+  40% { fill: #c9a58a; stroke: #c9a58a; }
+  46% { fill: #ff873e; stroke: #ff873e; }
+  52% { fill: #f09a64; stroke: #f09a64; }
+  58%,
+  100% { fill: #ff873e; stroke: #ff873e; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .intro__lead,
+  .intro__mark,
+  .intro__tagline,
+  .lamp-light,
+  .lamp-shade {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .lamp-shade {
+    fill: var(--tangerine);
+    stroke: var(--tangerine);
+  }
+}
