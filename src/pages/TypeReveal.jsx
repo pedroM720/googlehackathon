@@ -36,24 +36,20 @@ const prefersReducedMotion = () =>
   typeof window !== 'undefined' &&
   window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
-// Embedded inside the profile's Nook tab it drops its own page shell and logo.
-export default function TypeReveal({ embedded = false }) {
+export default function TypeReveal() {
   const type = NOOK_TYPES.find((t) => t.slug === SAMPLE_RESULT.slug)
   const [steps, setSteps] = useState(() => buildSteps(type))
   const [skip] = useState(prefersReducedMotion)
 
   const { text, index, done } = useScramble(steps, { skip })
-  const Shell = embedded ? 'div' : 'main'
 
   return (
-    <Shell className={`reveal ${embedded ? 'reveal--embedded' : ''} ${done ? 'is-revealed' : ''}`}>
-      {!embedded && (
-        <header className="reveal__brand">
-          <a href="/" aria-label="nook home">
-            <img src="/brand/nook-logo.svg" alt="nook" width="900" height="490" />
-          </a>
-        </header>
-      )}
+    <main className={`reveal ${done ? 'is-revealed' : ''}`}>
+      <header className="reveal__brand">
+        <a href="/" aria-label="nook home">
+          <img src="/brand/nook-logo.svg" alt="nook" width="900" height="490" />
+        </a>
+      </header>
 
       <section className="reveal__hero">
         <p className="reveal__lead">Your Nook type is</p>
@@ -112,6 +108,10 @@ export default function TypeReveal({ embedded = false }) {
           coming soon.
         </p>
 
+        <a className="reveal__next" href="/home" tabIndex={done ? 0 : -1}>
+          See who you might click with
+        </a>
+
         <button
           type="button"
           className="reveal__replay"
@@ -121,6 +121,6 @@ export default function TypeReveal({ embedded = false }) {
           Replay reveal
         </button>
       </section>
-    </Shell>
+    </main>
   )
 }

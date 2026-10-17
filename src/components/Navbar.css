@@ -61,7 +61,19 @@
   background: var(--tangerine);
   color: var(--espresso);
   font-weight: 600;
+  text-decoration: none;
   flex: none;
+  transition: box-shadow 0.15s ease;
+}
+
+.navbar__avatar:hover,
+.navbar__avatar[aria-current='page'] {
+  box-shadow: 0 0 0 3px var(--butter);
+}
+
+.navbar__avatar:focus-visible {
+  outline: 2px solid var(--burnt-orange);
+  outline-offset: 2px;
 }
 
 /* The navbar carries the logo, so the reveal page's own logo header steps aside. */
@@ -79,8 +91,15 @@
     width: 68px;
   }
 
+  .navbar__links {
+    min-width: 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
   .navbar__links a {
     padding: 6px 10px;
     font-size: 0.9375rem;
+    white-space: nowrap;
   }
 }

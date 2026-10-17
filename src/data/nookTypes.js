@@ -102,11 +102,11 @@ export const NOOK_TYPES = [
 
 // Placeholder result until Nook generates a type from a user's connected accounts.
 export const SAMPLE_RESULT = {
-  slug: 'reading-nook',
-  lean: 'Window Seat',
+  slug: 'open-mic',
+  lean: 'Porch Light',
   reasons: [
-    'You picked libraries, journaling and 30+ minute hangs, so we guessed Candle.',
-    'Film, history and finding a mentor point toward talking things through, so Muse.',
-    'You keep coming back to the same café and the same few people, so Roots.',
+    'You picked content creation and post on Instagram and YouTube, so we guessed you get energy from people: Lantern.',
+    'Graphic design and UI/UX lean toward ideas you share out loud, so Muse.',
+    'Your interests jump between design, data and coding, and you like meeting new people, so Roams.',
   ],
 }

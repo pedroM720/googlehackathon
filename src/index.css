@@ -35,3 +35,13 @@ body {
   clip-path: inset(50%);
   white-space: nowrap;
 }
+
+/* Round initials avatar (components/Avatar.jsx); each page sets its size. */
+.avatar {
+  display: grid;
+  place-items: center;
+  flex: none;
+  border-radius: 50%;
+  color: var(--espresso);
+  font-weight: 600;
+}

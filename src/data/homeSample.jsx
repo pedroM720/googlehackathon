@@ -35,14 +35,14 @@ export const RECENT_ACTIVITY = [
     time: '1h ago',
   },
   {
-    kind: 'search',
-    interest: 2,
+    kind: 'in-person',
+    interest: 4,
     text: (
       <>
-        You came up in <strong>80 searches</strong> yesterday.
+        <strong>Sasha Murakawa</strong> is at Caffe Strada and sent you an in-person spark.
       </>
     ),
-    time: 'yesterday',
+    time: '25m ago',
   },
   {
     kind: 'spark',
