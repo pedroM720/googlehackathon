@@ -1,0 +1,87 @@
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(255, 248, 236, 0.92);
+  border-bottom: 1px solid rgba(134, 121, 109, 0.18);
+  backdrop-filter: blur(6px);
+}
+
+.navbar__inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.navbar__logo img {
+  display: block;
+  width: 84px;
+  height: auto;
+}
+
+.navbar__links {
+  display: flex;
+  gap: 4px;
+  margin: 0 0 0 auto;
+  padding: 0;
+  list-style: none;
+}
+
+.navbar__links a {
+  display: block;
+  padding: 8px 14px;
+  border-radius: 999px;
+  color: var(--espresso);
+  font-weight: 500;
+  text-decoration: none;
+  transition: background 0.15s ease;
+}
+
+.navbar__links a:hover {
+  background: var(--cream);
+}
+
+.navbar__links a[aria-current='page'] {
+  background: var(--butter);
+}
+
+.navbar__links a:focus-visible {
+  outline: 2px solid var(--burnt-orange);
+  outline-offset: 2px;
+}
+
+.navbar__avatar {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--tangerine);
+  color: var(--espresso);
+  font-weight: 600;
+  flex: none;
+}
+
+/* The navbar carries the logo, so the reveal page's own logo header steps aside. */
+.has-navbar .reveal__brand {
+  display: none;
+}
+
+@media (max-width: 560px) {
+  .navbar__inner {
+    padding: 8px 16px;
+    gap: 12px;
+  }
+
+  .navbar__logo img {
+    width: 68px;
+  }
+
+  .navbar__links a {
+    padding: 6px 10px;
+    font-size: 0.9375rem;
+  }
+}
