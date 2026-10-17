@@ -1,10 +1,12 @@
 // Sample data for the signed-in home page. Nothing here comes from real accounts yet.
+// interest (1-5) stands in for how interested Nook's AI thinks you'd be; it sets each bubble's size.
 
 export const SAMPLE_USER = { firstName: 'Amy' }
 
 export const RECENT_ACTIVITY = [
   {
     kind: 'game',
+    interest: 3,
     text: (
       <>
         You ranked <strong>#1</strong> on today’s <strong>Nook Crossword</strong>.
@@ -14,6 +16,7 @@ export const RECENT_ACTIVITY = [
   },
   {
     kind: 'spark-back',
+    interest: 5,
     text: (
       <>
         <strong>Pedro</strong> sparked you back. Say hi while it’s fresh.
@@ -23,6 +26,7 @@ export const RECENT_ACTIVITY = [
   },
   {
     kind: 'chat',
+    interest: 4,
     text: (
       <>
         <strong>Emma</strong> asked to chat with you.
@@ -32,6 +36,7 @@ export const RECENT_ACTIVITY = [
   },
   {
     kind: 'search',
+    interest: 2,
     text: (
       <>
         You came up in <strong>80 searches</strong> yesterday.
@@ -41,6 +46,7 @@ export const RECENT_ACTIVITY = [
   },
   {
     kind: 'spark',
+    interest: 3,
     text: (
       <>
         <strong>Jordan</strong> just added a spark: you.
