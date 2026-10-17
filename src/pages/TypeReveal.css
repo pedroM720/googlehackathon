@@ -70,6 +70,57 @@
   color: var(--warm-gray);
 }
 
+.reveal__row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(8px, 1.6vw, 16px);
+}
+
+/* Each type's icon sits to the right of its name and pops in as the name changes. */
+.reveal__icon {
+  flex: none;
+  width: clamp(2.25rem, 8vw, 4.25rem);
+  height: auto;
+  color: var(--warm-gray);
+  animation: icon-pop 0.25s ease-out;
+  transition: color 0.4s ease-out;
+}
+
+.reveal__icon .type-icon__accent {
+  fill: var(--cream);
+  transition: fill 0.4s ease-out;
+}
+
+.is-revealed .reveal__icon {
+  color: var(--espresso);
+  animation: icon-land 0.6s cubic-bezier(0.2, 1.4, 0.4, 1);
+}
+
+.is-revealed .reveal__icon .type-icon__accent {
+  fill: var(--tangerine);
+}
+
+@keyframes icon-pop {
+  from {
+    opacity: 0;
+    transform: scale(0.7);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes icon-land {
+  0% {
+    transform: scale(0.8) rotate(-8deg);
+  }
+  100% {
+    transform: none;
+  }
+}
+
 .reveal__word {
   font-size: clamp(2.5rem, 10vw, 5rem);
   font-weight: 600;
@@ -238,6 +289,10 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .reveal__icon,
+  .is-revealed .reveal__icon {
+    animation: none;
+  }
   .reveal__hero::before,
   .reveal__word,
   .reveal__quote,
