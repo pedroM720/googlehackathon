@@ -1,0 +1,28 @@
+:root {
+  --ivory: #fff8ec;
+  --cream: #f5e9d5;
+  --butter: #ffe9a3;
+  --amber: #ffb52e;
+  --tangerine: #ff873e;
+  --burnt-orange: #e86a2c;
+  --espresso: #302016;
+  --warm-gray: #86796d;
+
+  font-family: 'Nunito', 'DM Sans', 'Inter', system-ui, sans-serif;
+  color: var(--espresso);
+  background: var(--ivory);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--ivory);
+}
