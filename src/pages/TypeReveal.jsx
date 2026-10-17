@@ -42,7 +42,7 @@ export default function TypeReveal() {
     <main className={`reveal ${done ? 'is-revealed' : ''}`}>
       <header className="reveal__brand">
         <a href="/" aria-label="nook home">
-          <img src="/nook-logo.png" alt="nook" width="870" height="471" />
+          <img src="/brand/nook-logo.svg" alt="nook" width="900" height="490" />
         </a>
       </header>
 
