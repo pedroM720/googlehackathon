@@ -48,7 +48,7 @@ Recruiting is a possible future use, not the MVP focus.
 - "Find the people you didn't know to look for."
 - "Connections beyond the obvious."
 - "More than things in common."
-- "Real people. Better connections." (currently on the logo draft)
+- "Real people. Better connections." (was on the draft logo)
 - "Meet beyond your algorithm."
 
 **How Nook talks**
@@ -62,18 +62,26 @@ Recruiting is a possible future use, not the MVP focus.
 
 ## Logo
 
-The wordmark is the lowercase word **nook**, in a thick, rounded, geometric sans with dark espresso strokes.
+**Status: final.** The final mark is in the repo and is the one to use everywhere on the site.
 
-- **The two o's are eyes.** Each has a dark pupil offset in the same direction, as if glancing sideways. They mean looking, noticing, curiosity, seeing people beyond their profiles. Keep it subtle and intentional, not cartoonish (no lashes, no faces).
-- **The k is a lamp.** Its vertical stem is the lamp stand on a small rounded base, with a tangerine lampshade on top and a soft amber cone of light falling beneath it. The lamp must read as part of the letter, not as an icon placed above the word.
+**Assets**
+- `public/brand/nook-logo.png`: the original final logo (927×536, white background).
+- `public/brand/nook-logo.svg`: vector version traced from the PNG, transparent background. Use it for static placements (`<img src="/brand/nook-logo.svg">`).
+- `src/components/Wordmark.jsx`: the same vector as a React component with the lamp as separate layers, so it can be switched off and on (used by the landing intro). Path data lives in `src/components/logoPaths.js`.
+
+**Anatomy**
+- **Letters:** lowercase **nook** in a clean geometric sans with flat terminals, solid black (`#000000`).
+- **The two o's are eyes.** Each holds a tall oval pupil set toward its right edge, so both glance toward the lamp. Keep it subtle: no lashes, no faces.
+- **The k is a lamp.** Its tall stem is the lamp stand, standing on a small tangerine oval base. Above it hangs a tangerine shade (`#FF8544`) with a curved lower rim, a warm amber underside (`#F0CC6F`) and a white bulb peeking out.
+- **The light:** a soft yellow cone (`#EADC62`, fading from about 55% to near 0% opacity) falls from the shade over the second o and the k, tinting the letters it crosses. It is light, not decoration on the letters.
 - **Legibility first.** At a glance it must read "nook". The eyes and lamp are seasoning.
 - **Must scale** to a browser navbar, a mobile header, and an app icon. For tiny sizes, simplify: drop the light cone first, then the shade detail; a lone lamp-k or eye-o can serve as the app icon.
 
-**Current status:** the attached logo is a **draft, not final**. Use it for direction (shape language, eyes, lamp, palette) and expect the final mark to change.
+**Lockup:** the wordmark on warm ivory, with a short lowercase tagline set below in a lighter, widely tracked sans (the landing page uses "for real connections.").
 
-**Draft lockup:** wordmark on warm ivory, with the tagline "real people. better connections." set below in a lighter, lowercase, widely tracked sans.
+**Motion:** the lamp may flicker on as the logo arrives (an old bulb catching, then holding). Once on, it stays on. Show the lit logo with no motion when the user prefers reduced motion.
 
-**Don'ts:** no gradients on the letterforms, no outer glow around the word, no recoloring the strokes in orange, no placing the wordmark on busy imagery.
+**Don'ts:** no gradients on the letterforms, no outer glow around the word, no recoloring the letters in orange, no placing the wordmark on busy imagery, no redrawing the mark from a UI font.
 
 ## Color
 
@@ -87,7 +95,7 @@ Warm, sunlit, interior. Starting tokens, open to refinement:
 | `amber` | `#FFB52E` | Lamp glow, highlights, focus accents |
 | `tangerine` | `#FF873E` | Brand accent, primary CTA fill |
 | `burnt-orange` | `#E86A2C` | CTA hover/pressed, links, emphasis |
-| `espresso` | `#302016` | Primary text, logo strokes |
+| `espresso` | `#302016` | Primary text (the logo itself uses black) |
 | `warm-gray` | `#86796D` | Secondary text, placeholders, borders |
 
 Peach (a muted tint between cream and tangerine) is also in range for secondary surfaces.

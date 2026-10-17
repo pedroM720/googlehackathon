@@ -29,7 +29,7 @@
 
 .intro__mark {
   margin: 0;
-  width: min(84vw, 560px);
+  width: min(80vw, 480px);
   line-height: 0;
   opacity: 0;
   transform: translateY(-70vh);
@@ -50,8 +50,16 @@
 
 .lamp-shade {
   fill: #c9a58a;
-  stroke: #c9a58a;
+ 
   animation: flicker-shade 1.5s linear var(--t-lamp) forwards;
+}
+
+.lamp-opening-off {
+  fill: #b98a6c;
+}
+
+.lamp-bulb-off {
+  fill: #e8ded2;
 }
 
 .intro__tagline {
@@ -105,17 +113,17 @@
 }
 
 @keyframes flicker-shade {
-  0% { fill: #c9a58a; stroke: #c9a58a; }
-  6% { fill: #ff873e; stroke: #ff873e; }
-  10% { fill: #d8a07c; stroke: #d8a07c; }
-  18% { fill: #c9a58a; stroke: #c9a58a; }
-  24% { fill: #f5945a; stroke: #f5945a; }
-  27% { fill: #d8a07c; stroke: #d8a07c; }
-  40% { fill: #c9a58a; stroke: #c9a58a; }
-  46% { fill: #ff873e; stroke: #ff873e; }
-  52% { fill: #f09a64; stroke: #f09a64; }
+  0% { fill: #c9a58a; }
+  6% { fill: #ff8544; }
+  10% { fill: #d8a07c; }
+  18% { fill: #c9a58a; }
+  24% { fill: #f5945a; }
+  27% { fill: #d8a07c; }
+  40% { fill: #c9a58a; }
+  46% { fill: #ff8544; }
+  52% { fill: #f09a64; }
   58%,
-  100% { fill: #ff873e; stroke: #ff873e; }
+  100% { fill: #ff8544; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -129,7 +137,6 @@
     transform: none;
   }
   .lamp-shade {
-    fill: var(--tangerine);
-    stroke: var(--tangerine);
+    fill: #ff8544;
   }
 }
