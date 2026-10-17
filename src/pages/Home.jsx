@@ -1,6 +1,10 @@
 import { LEADERBOARD, RECENT_ACTIVITY, SAMPLE_USER, SUGGESTED_SPARKS } from '../data/homeSample.jsx'
+import SparkIcon from '../components/SparkIcon.jsx'
+import TypeIcon from '../components/TypeIcon.jsx'
+import { NOOK_TYPES, SAMPLE_RESULT } from '../data/nookTypes.js'
 import './Home.css'
 
+// The sparkle marks AI-written text only (match reasons). Sparks themselves use SparkIcon.
 function Sparkle({ className = '' }) {
   return (
     <svg className={className} viewBox="0 0 24 24" aria-hidden="true">
@@ -14,23 +18,29 @@ const ACTIVITY_ICONS = {
   game: (
     <path d="M4 4h16v16H4zM4 10h16M4 15h16M10 4v16M15 4v16" />
   ),
-  'spark-back': (
-    <path d="M7 7h10l-3-3M17 17H7l3 3" />
-  ),
   chat: (
     <path d="M5 5h14v10H10l-4 4v-4H5z" />
   ),
   search: (
     <path d="M10.5 4a6.5 6.5 0 1 1 0 13 6.5 6.5 0 0 1 0-13ZM15.5 15.5 20 20" />
   ),
-  spark: (
-    <path d="M12 3c.5 4 2.5 6 6.5 6.5-4 .5-6 2.5-6.5 6.5-.5-4-2.5-6-6.5-6.5 4-.5 6-2.5 6.5-6.5ZM12 17v4" />
-  ),
 }
 
 const initial = (name) => name.charAt(0).toUpperCase()
+const typeBySlug = (slug) => NOOK_TYPES.find((t) => t.slug === slug)
+
+function ActivityIcon({ kind }) {
+  if (kind === 'spark' || kind === 'spark-back') return <SparkIcon className="activity__spark" />
+  return (
+    <svg className="activity__icon" viewBox="0 0 24 24" aria-hidden="true">
+      {ACTIVITY_ICONS[kind]}
+    </svg>
+  )
+}
 
 export default function Home() {
+  const myType = typeBySlug(SAMPLE_RESULT.slug)
+
   return (
     <main className="home">
       <h1 className="home__welcome">Welcome, {SAMPLE_USER.firstName}!</h1>
@@ -56,9 +66,7 @@ export default function Home() {
                       className="bubble"
                       style={{ '--interest': item.interest, '--i': i }}
                     >
-                      <svg className="activity__icon" viewBox="0 0 24 24" aria-hidden="true">
-                        {ACTIVITY_ICONS[item.kind]}
-                      </svg>
+                      <ActivityIcon kind={item.kind} />
                       <p className="bubble__text">{item.text}</p>
                       <span className="bubble__time">{item.time}</span>
                     </li>
@@ -74,8 +82,9 @@ export default function Home() {
                       <span className="leaderboard__rank">{i + 1}</span>
                       <span className="leaderboard__name">{row.name}</span>
                       <span className="leaderboard__count">
-                        <Sparkle className="leaderboard__spark" />
+                        <SparkIcon className="leaderboard__spark" />
                         {row.sparks}
+                        <span className="visually-hidden"> sparks</span>
                       </span>
                     </li>
                   ))}
@@ -91,7 +100,9 @@ export default function Home() {
             </div>
 
             <ul className="sparks">
-              {SUGGESTED_SPARKS.map((person) => (
+              {SUGGESTED_SPARKS.map((person) => {
+                const type = typeBySlug(person.nookType)
+                return (
                 <li
                   key={person.name}
                   className={`spark ${person.featured ? 'spark--featured' : ''}`}
@@ -109,13 +120,17 @@ export default function Home() {
                     >
                       {initial(person.name)}
                     </span>
-                    <div>
+                    <div className="spark__who">
                       <p className="spark__name">{person.name}</p>
                       {person.role.map((line) => (
                         <p key={line} className="spark__role">
                           {line}
                         </p>
                       ))}
+                      <p className="spark__type">
+                        <TypeIcon slug={type.slug} className="spark__type-icon" />
+                        {type.name}
+                      </p>
                     </div>
                   </div>
                   <p className="spark__reason">
@@ -123,18 +138,38 @@ export default function Home() {
                     <span>{person.reason}</span>
                   </p>
                 </li>
-              ))}
+                )
+              })}
             </ul>
           </section>
         </div>
 
-        <nav className="home__menu" aria-label="Your nook">
-          <a href="/reveal">my nook</a>
-          <a href="#sparks">my sparks</a>
-          <span className="home__menu-soon" aria-disabled="true">
-            search <small>soon</small>
-          </span>
-        </nav>
+        <aside className="home__side">
+          <nav className="home__menu" aria-label="Your nook">
+            <a href="/reveal">my nook</a>
+            <a href="#sparks">my sparks</a>
+            <span className="home__menu-soon" aria-disabled="true">
+              search <small>soon</small>
+            </span>
+          </nav>
+
+          <a className="side-card side-card--type" href="/reveal">
+            <span className="side-card__label">your nook type</span>
+            <TypeIcon slug={myType.slug} className="side-card__icon" />
+            <span className="side-card__title">{myType.name}</span>
+            <span className="side-card__quote">“{myType.quote}”</span>
+            <span className="side-card__link">see your reveal →</span>
+          </a>
+
+          <div className="side-card">
+            <span className="side-card__label">today’s game</span>
+            <span className="side-card__title">Nook Crossword</span>
+            <span className="side-card__stat">
+              You’re <strong>#1</strong> at 2:14
+            </span>
+            <span className="side-card__note">New puzzle at midnight</span>
+          </div>
+        </aside>
       </div>
 
       <button type="button" className="chat-bubble" aria-label="Chats (coming soon)" disabled>
