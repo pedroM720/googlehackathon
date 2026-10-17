@@ -146,12 +146,12 @@ export default function Home() {
 
         <aside className="home__side">
           <nav className="home__menu" aria-label="Your nook">
-            <a href="/reveal">my nook</a>
+            <a href="/my-nook">my nook</a>
             <a href="#sparks">my sparks</a>
             <a href="/search">search</a>
           </nav>
 
-          <a className="side-card side-card--type" href="/reveal">
+          <a className="side-card side-card--type" href="/my-nook">
             <span className="side-card__label">your nook type</span>
             <TypeIcon slug={myType.slug} className="side-card__icon" />
             <span className="side-card__title">{myType.name}</span>

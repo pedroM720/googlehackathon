@@ -1,12 +1,9 @@
 import { useEffect, useState } from 'react'
 import ChipGroup from '../components/ChipGroup.jsx'
-import TypeIcon from '../components/TypeIcon.jsx'
-import TypeReveal from './TypeReveal.jsx'
-import { NOOK_TYPES, SAMPLE_RESULT } from '../data/nookTypes.js'
 import { CONNECT_GROUPS, FOCUS_INTERESTS, MONTHS, SKILLS } from '../data/profileOptions.js'
 import './Profile.css'
 
-// The signed-in user's own profile ("my nook"): an about-me tab and the Nook type reveal.
+// The signed-in user's profile: fill in your info, then "get my nook type" leads to the reveal.
 // Everything here is sample data held in the page; nothing is saved or sent anywhere yet.
 const SAMPLE_PROFILE = {
   name: 'Amy Jung',
@@ -15,11 +12,6 @@ const SAMPLE_PROFILE = {
   skills: ['UI/UX', 'Coding', 'Data Analysis'],
   connect: ['Instagram', 'YouTube', 'Spotify', 'Claude'],
 }
-
-const TABS = [
-  { id: 'about', label: 'about me', path: '/profile' },
-  { id: 'nook', label: 'my nook type', path: '/reveal' },
-]
 
 const toggle = (list, item) =>
   list.includes(item) ? list.filter((i) => i !== item) : [...list, item]
@@ -147,53 +139,29 @@ function AboutMe() {
   )
 }
 
-export default function Profile({ initialTab = 'about' }) {
-  const [tab, setTab] = useState(initialTab)
-  const type = NOOK_TYPES.find((t) => t.slug === SAMPLE_RESULT.slug)
-
-  const openTab = (id) => {
-    setTab(id)
-    const path = TABS.find((t) => t.id === id).path
-    if (window.location.pathname !== path) window.history.replaceState(null, '', path)
-  }
-
+export default function Profile() {
   return (
-    <main className={`profile profile--${tab}`}>
+    <main className="profile">
       <header className="profile__head">
         <Photo />
         <div className="profile__intro">
-          <h1 className="profile__title">my nook</h1>
+          <h1 className="profile__title">my profile</h1>
           <p className="profile__name">{SAMPLE_PROFILE.name}</p>
           <p className="profile__meta">
             {SAMPLE_PROFILE.school}
-            <button type="button" className="profile__type" onClick={() => openTab('nook')}>
-              <TypeIcon slug={type.slug} className="profile__type-icon" />
-              {type.name}
-            </button>
             <span className="profile__sample">sample profile</span>
           </p>
-
-          <div className="profile__tabs" role="tablist" aria-label="Profile sections">
-            {TABS.map((t) => (
-              <button
-                key={t.id}
-                type="button"
-                role="tab"
-                id={`tab-${t.id}`}
-                aria-selected={tab === t.id}
-                aria-controls={`panel-${t.id}`}
-                onClick={() => openTab(t.id)}
-              >
-                {t.label}
-              </button>
-            ))}
-          </div>
         </div>
       </header>
 
-      <section id={`panel-${tab}`} role="tabpanel" aria-labelledby={`tab-${tab}`}>
-        {tab === 'about' ? <AboutMe /> : <TypeReveal embedded />}
-      </section>
+      <AboutMe />
+
+      <div className="profile__next">
+        <p>Filled in what feels like you? Nook can find the kind of place you’d be.</p>
+        <a className="profile__cta" href="/my-nook">
+          get my nook type
+        </a>
+      </div>
     </main>
   )
 }

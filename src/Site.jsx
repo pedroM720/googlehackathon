@@ -3,19 +3,23 @@ import App from './App.jsx'
 import Navbar from './components/Navbar.jsx'
 import Home from './pages/Home.jsx'
 
-// Home ships with the app since nearly every visit lands there. Profile and search load as their
+// Home ships with the app since nearly every visit lands there. The other pages load as their
 // own chunks, fetched in the background once the first view is up, so switching pages never waits.
 const loadProfile = () => import('./pages/Profile.jsx')
+const loadReveal = () => import('./pages/TypeReveal.jsx')
 const loadSearch = () => import('./pages/Search.jsx')
 const Profile = lazy(loadProfile)
+const TypeReveal = lazy(loadReveal)
 const Search = lazy(loadSearch)
 
 // The landing intro stands alone at /. Signed-in pages share the navbar; anything unknown lands
-// on /home. /reveal opens the profile on its Nook type tab.
+// on /home. The profile (from the avatar) is where you fill in your info; "get my nook type"
+// there leads to /my-nook, which plays the reveal. /reveal is an older name for it.
 const ROUTES = {
   '/home': { nav: '/home', page: () => <Home /> },
   '/profile': { nav: '/profile', page: () => <Profile /> },
-  '/reveal': { nav: '/profile', page: () => <Profile initialTab="nook" /> },
+  '/my-nook': { nav: '/my-nook', page: () => <TypeReveal /> },
+  '/reveal': { nav: '/my-nook', page: () => <TypeReveal /> },
   '/search': { nav: '/search', page: () => <Search /> },
 }
 
@@ -53,7 +57,7 @@ export default function Site() {
   }, [])
 
   useEffect(() => {
-    const preload = () => [loadProfile, loadSearch].forEach((load) => load())
+    const preload = () => [loadProfile, loadReveal, loadSearch].forEach((load) => load())
     if ('requestIdleCallback' in window) {
       const id = window.requestIdleCallback(preload, { timeout: 2000 })
       return () => window.cancelIdleCallback(id)

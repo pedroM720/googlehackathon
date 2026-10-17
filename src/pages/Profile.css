@@ -1,4 +1,4 @@
-/* "my nook": photo and name up top, then tabs for the about-me form and the Nook type reveal. */
+/* Profile: photo and name up top, the about-me form, then the step to get your Nook type. */
 .profile {
   --panel: rgba(255, 252, 244, 0.86);
   --field: #fffcf4;
@@ -27,13 +27,8 @@
     rgba(255, 233, 163, 0) 100%
   );
   clip-path: polygon(8% 0, 62% 0, 100% 100%, 0 100%);
-  transition: opacity 0.4s ease;
 }
 
-/* The reveal brings its own glow, so the beam steps aside on the Nook tab. */
-.profile--nook::before {
-  opacity: 0;
-}
 
 .profile__head {
   display: grid;
@@ -132,39 +127,10 @@
   color: var(--warm-gray);
 }
 
-.profile__type {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 12px 4px 6px;
-  border: 0;
-  border-radius: 999px;
-  background: var(--butter);
-  color: var(--espresso);
-  font: inherit;
-  font-size: 0.9375rem;
-  font-weight: 600;
-  cursor: pointer;
-}
 
-.profile__type:hover {
-  background: #ffe08a;
-}
 
-.profile__type:focus-visible {
-  outline: 2px solid var(--burnt-orange);
-  outline-offset: 2px;
-}
 
-.profile__type-icon {
-  width: 24px;
-  height: 24px;
-  color: var(--espresso);
-}
 
-.profile__type-icon .type-icon__accent {
-  fill: var(--tangerine);
-}
 
 .profile__sample {
   font-size: 0.75rem;
@@ -175,37 +141,9 @@
   padding: 3px 10px;
 }
 
-.profile__tabs {
-  display: inline-flex;
-  gap: 4px;
-  margin-top: 22px;
-  padding: 4px;
-  border-radius: 999px;
-  background: var(--cream);
-}
 
-.profile__tabs button {
-  padding: 8px 18px;
-  border: 0;
-  border-radius: 999px;
-  background: none;
-  color: var(--espresso);
-  font: inherit;
-  font-weight: 500;
-  cursor: pointer;
-  transition: background-color 0.15s ease;
-}
 
-.profile__tabs button[aria-selected='true'] {
-  background: var(--ivory);
-  font-weight: 600;
-  box-shadow: 0 2px 8px rgba(48, 32, 22, 0.08);
-}
 
-.profile__tabs button:focus-visible {
-  outline: 2px solid var(--burnt-orange);
-  outline-offset: 2px;
-}
 
 /* About me */
 .about {
@@ -324,6 +262,47 @@
 
 .about__card .chips--sm {
   margin-top: -8px;
+}
+
+.profile__next {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px 24px;
+  margin-top: 24px;
+  padding: 22px 28px;
+  border-radius: 18px;
+  background: var(--butter);
+}
+
+.profile__next p {
+  margin: 0;
+  font-size: 1.0625rem;
+  font-weight: 500;
+}
+
+/* The page's one primary action. */
+.profile__cta {
+  padding: 12px 26px;
+  border-radius: 999px;
+  background: var(--tangerine);
+  color: var(--espresso);
+  font-size: 1.0625rem;
+  font-weight: 600;
+  text-decoration: none;
+  box-shadow: 0 8px 20px rgba(232, 106, 44, 0.25);
+  transition: background-color 0.15s ease, transform 0.15s ease;
+}
+
+.profile__cta:hover {
+  background: var(--burnt-orange);
+  transform: translateY(-1px);
+}
+
+.profile__cta:focus-visible {
+  outline: 2px solid var(--espresso);
+  outline-offset: 3px;
 }
 
 @keyframes profile-fade {

@@ -2,7 +2,7 @@ import './Navbar.css'
 
 const LINKS = [
   { href: '/home', label: 'home' },
-  { href: '/profile', label: 'my nook' },
+  { href: '/my-nook', label: 'my nook' },
   { href: '/search', label: 'search' },
 ]
 
@@ -25,9 +25,14 @@ export default function Navbar({ current }) {
             </li>
           ))}
         </ul>
-        <span className="navbar__avatar" aria-label="Signed in as Amy (sample)">
+        <a
+          className="navbar__avatar"
+          href="/profile"
+          aria-label="Your profile (signed in as Amy Jung, sample)"
+          aria-current={current === '/profile' ? 'page' : undefined}
+        >
           A
-        </span>
+        </a>
       </nav>
     </header>
   )
