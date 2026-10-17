@@ -40,20 +40,29 @@ export default function Home() {
           <section className="home__section" aria-labelledby="activity-heading">
             <div className="home__section-head">
               <h2 id="activity-heading">recent activity</h2>
+              <span className="home__hint home__hint--grow">
+                bigger bubbles are the ones Nook thinks you’ll care about most
+              </span>
               <span className="home__sample">sample data</span>
             </div>
 
             <div className="activity">
-              <ul className="activity__list">
-                {RECENT_ACTIVITY.map((item, i) => (
-                  <li key={i} className="activity__item">
-                    <svg className="activity__icon" viewBox="0 0 24 24" aria-hidden="true">
-                      {ACTIVITY_ICONS[item.kind]}
-                    </svg>
-                    <p className="activity__text">{item.text}</p>
-                    <span className="activity__time">{item.time}</span>
-                  </li>
-                ))}
+              <ul className="bubbles">
+                {[...RECENT_ACTIVITY]
+                  .sort((a, b) => b.interest - a.interest)
+                  .map((item, i) => (
+                    <li
+                      key={item.kind}
+                      className="bubble"
+                      style={{ '--interest': item.interest, '--i': i }}
+                    >
+                      <svg className="activity__icon" viewBox="0 0 24 24" aria-hidden="true">
+                        {ACTIVITY_ICONS[item.kind]}
+                      </svg>
+                      <p className="bubble__text">{item.text}</p>
+                      <span className="bubble__time">{item.time}</span>
+                    </li>
+                  ))}
               </ul>
 
               <div className="leaderboard">
