@@ -1,6 +1,6 @@
 # nook
 
-Landing page and Nook type reveal for Nook, built with React + Vite. Brand and style rules live in [identity.md](identity.md).
+Landing page and Nook type reveal for Nook, built with React + Vite. Brand and style rules live in [identity.md](identity.md). The final logo is in `public/brand/` (PNG and SVG) and as the animated `src/components/Wordmark.jsx`.
 
 ## Run it
 

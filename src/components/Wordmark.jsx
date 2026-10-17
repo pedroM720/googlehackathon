@@ -1,60 +1,63 @@
 import { useId } from 'react'
+import {
+  BASE,
+  BULB,
+  COLORS,
+  CONE,
+  CONE_STOPS,
+  LAYER_TRANSFORM,
+  LETTERS,
+  OPENING,
+  SHADE,
+  VIEW_BOX,
+} from './logoPaths.js'
 
-// The nook wordmark: the o's are eyes glancing toward the lamp, the k is the lamp.
-// Draft geometry from the current logo direction; expect the final mark to change.
+// The final nook logo as layered SVG, so the lamp can be switched on and off.
+// Everything inside .lamp-light is the lit state; the shade's colour is set in CSS.
 export default function Wordmark({ className = '' }) {
-  const glowId = useId()
+  const coneId = useId()
 
   return (
     <svg
       className={`wordmark ${className}`}
-      viewBox="0 0 480 215"
+      viewBox={VIEW_BOX}
       role="img"
       aria-label="nook"
     >
       <defs>
-        <linearGradient id={glowId} x1="0" y1="0" x2="0.35" y2="1">
-          <stop offset="0" stopColor="#FFB52E" stopOpacity="0.55" />
-          <stop offset="1" stopColor="#FFB52E" stopOpacity="0" />
+        <linearGradient
+          id={coneId}
+          x1="0"
+          y1="170"
+          x2="0"
+          y2="467"
+          gradientUnits="userSpaceOnUse"
+        >
+          {CONE_STOPS.map(([offset, opacity]) => (
+            <stop
+              key={offset}
+              offset={offset}
+              stopColor={COLORS.cone}
+              stopOpacity={opacity}
+            />
+          ))}
         </linearGradient>
       </defs>
 
-      <g className="lamp-light">
-        <path d="M330 58 H400 L476 210 H300 Z" fill={`url(#${glowId})`} />
-        <circle cx="365" cy="63" r="7" fill="#FFB52E" />
+      <g transform={LAYER_TRANSFORM}>
+        <path fill={COLORS.ink} d={LETTERS} />
+        <path fill={COLORS.shade} d={BASE} />
+        <path className="lamp-opening-off" d={OPENING} />
+        <path className="lamp-light" fill={COLORS.opening} d={OPENING} />
       </g>
 
-      <g
-        fill="none"
-        stroke="#302016"
-        strokeWidth="26"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        {/* n */}
-        <path d="M40 113 V187 M40 150 a37 37 0 0 1 74 0 V187" />
-        {/* o o */}
-        <circle cx="180" cy="150" r="37" />
-        <circle cx="280" cy="150" r="37" />
-        {/* k: lamp stand and arms */}
-        <path d="M365 66 V187" />
-        <path d="M371 160 L414 114 M383 149 L418 187" />
-      </g>
+      <path className="lamp-light" fill={`url(#${coneId})`} d={CONE} />
 
-      {/* pupils */}
-      <g className="pupils" fill="#302016">
-        <circle cx="190" cy="150" r="12" />
-        <circle cx="290" cy="150" r="12" />
+      <g transform={LAYER_TRANSFORM}>
+        <path className="lamp-shade" d={SHADE} />
+        <path className="lamp-bulb-off" d={BULB} />
+        <path className="lamp-light" fill={COLORS.bulb} d={BULB} />
       </g>
-
-      {/* lamp base and shade */}
-      <rect x="337" y="188" width="56" height="13" rx="6.5" fill="#302016" />
-      <path
-        className="lamp-shade"
-        d="M348 14 H382 L406 56 H324 Z"
-        strokeWidth="6"
-        strokeLinejoin="round"
-      />
     </svg>
   )
 }
