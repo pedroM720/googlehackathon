@@ -18,18 +18,14 @@
   padding: clamp(24px, 5vh, 48px) 24px 96px;
 }
 
-/* The one glow on this view: a lamp beam falling down the left side, two layers deep. */
-.home::before,
-.home::after {
+/* The one glow on this view: a single long lamp beam falling down the left side. */
+.home::before {
   content: '';
   position: absolute;
   top: 0;
   bottom: 0;
   z-index: -1;
   pointer-events: none;
-}
-
-.home::before {
   left: -4%;
   width: min(760px, 70vw);
   background: linear-gradient(
@@ -39,18 +35,6 @@
     rgba(255, 233, 163, 0.16) 100%
   );
   clip-path: polygon(18% 0, 50% 0, 100% 100%, 0 100%);
-}
-
-.home::after {
-  left: 2%;
-  width: min(520px, 50vw);
-  background: linear-gradient(
-    180deg,
-    rgba(255, 210, 100, 0.6) 0%,
-    rgba(255, 226, 140, 0.32) 55%,
-    rgba(255, 233, 163, 0.12) 100%
-  );
-  clip-path: polygon(30% 0, 62% 0, 92% 100%, 4% 100%);
 }
 
 .visually-hidden {
